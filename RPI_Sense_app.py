@@ -12,70 +12,6 @@ sense.set_rotation(180)
 
 counter = 0
 
-html_page = """<!DOCTYPE HTML>
-<html>
-<head>
-<title>Sensormtning</title>
-<script>
-
-    var XMLHttp = new XMLHttpRequest();
-    
-    function startMeasure()
-    {
-        if(XMLHttp.readyState == 0 || XMLHttp.readyState == 4)
-        {
-           XMLHttp.open("GET", "/ajax", true);
-           XMLHttp.onreadystatechange = handleServerResponse; // anropas da man far ett svar
-           XMLHttp.send(null);
-           setTimeout('startMeasure()',1000);
-        }
-        else
-        {
-           //alert("korvTimeout")
-           setTimeout('startMeasure()',1000); //vanta en sekund, sedan prova igen
-        }
-    }
-
-    function handleServerResponse()
-    {
-       if(XMLHttp.readyState == 4)
-       {
-          if(XMLHttp.status == 200) //om verforingen funkade
-          {
-            json = JSON.parse(XMLHttp.responseText);
-            document.getElementById("tempDiv").innerHTML = 'Temp: ' + json.Temp;
-            document.getElementById("pressureDiv").innerHTML = 'Tryck: ' + json.Pressure;
-          }
-          else
-          {
-             //alert("korv5")
-          }
-       }
-    }
-
-    function displayText()
-    {
-       if(XMLHttp.readyState == 0 || XMLHttp.readyState == 4)
-       {
-          XMLHttp.open("GET", "/displaytext", true);
-          XMLHttp.send(null);
-       }
-    
-    }
-</script>
-</head>
-<body>
-<h1>SensormÃ¤tning</h1>
-<form action="" method="GET">
-<input type="button" value="Starta mÃ¤tning" onclick="startMeasure()">
-</form>
-<form action="" method="GET">
-<input type="button" value="Visa text" onclick="displayText()"
-</form>
-<div id="tempDiv"></div>
-<div id="pressureDiv"></div>
-</body>
-</html>"""
 
 @app.route('/api', methods=['POST'])
 def get_sensor_value(): 
@@ -85,7 +21,7 @@ def get_sensor_value():
 
 @app.route('/')
 def index():
-    return html_page
+    return render_template(RPI_Sense_app.html)
         
         
 @app.route('/ajax', methods = ['GET'])

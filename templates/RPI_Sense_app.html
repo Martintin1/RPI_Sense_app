@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Sensormtning</title>
+<script src="{{url_for('static', filename='RPI_Sense_app.js')}}"></script>
+</head>
+<body>
+<h1>SensormÃ¤tning</h1>
+<form action="" method="GET">
+<input type="button" value="Starta mÃ¤tning" onclick="startMeasure()">
+</form>
+<form action="" method="GET">
+<input type="button" value="Visa text" onclick="displayText()"
+</form>
+<div id="tempDiv"></div>
+<div id="pressureDiv"></div>
+</body>
+</html>
