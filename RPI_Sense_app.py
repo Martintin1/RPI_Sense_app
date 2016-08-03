@@ -11,6 +11,7 @@ sense = SenseHat()
 sense.set_rotation(180)
 
 counter = 0
+displayGreen = True
 
 
 @app.route('/api', methods=['POST'])
@@ -30,6 +31,16 @@ def ajax_request():
     valuePressure = str(round(sense.get_pressure(), 1))
 
     global counter
+    global displayGreen
+    
+    if(displayGreen):
+        sense.set_pixel(1, 1, [0, 255, 0])
+        displayGreen = False
+    else:
+        sense.set_pixel(1, 1, [0, 0, 255])
+        displayGreen = True
+
+
     counter += 1
     if(counter == 10):
         sense.show_message("Temp: " + valueTemp)
