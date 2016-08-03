@@ -21,7 +21,7 @@ def get_sensor_value():
 
 @app.route('/')
 def index():
-    return render_template(RPI_Sense_app.html)
+    return render_template('RPI_Sense_app.html')
         
         
 @app.route('/ajax', methods = ['GET'])
