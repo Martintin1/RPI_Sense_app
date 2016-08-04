@@ -34,12 +34,27 @@ def ajax_request():
     global displayGreen
     
     if(displayGreen):
-        sense.set_pixel(1, 1, [0, 255, 0])
+        sense.set_pixel(0, 0, [0, 255, 0])
+        sense.set_pixel(1, 0, [0, 255, 0])
+        sense.set_pixel(2, 0, [0, 255, 0])
+        sense.set_pixel(3, 0, [0, 255, 0])
+
+        sense.set_pixel(4, 0, [0, 0, 0])
+        sense.set_pixel(5, 0, [0, 0, 0])
+        sense.set_pixel(6, 0, [0, 0, 0])
+        sense.set_pixel(7, 0, [0, 0, 0])
         displayGreen = False
     else:
-        sense.set_pixel(1, 1, [0, 0, 255])
-        displayGreen = True
+        sense.set_pixel(4, 0, [0, 0, 255])
+        sense.set_pixel(5, 0, [0, 0, 255])
+        sense.set_pixel(6, 0, [0, 0, 255])
+        sense.set_pixel(7, 0, [0, 0, 255])
 
+        sense.set_pixel(0, 0, [0, 0, 0])
+        sense.set_pixel(1, 0, [0, 0, 0])
+        sense.set_pixel(2, 0, [0, 0, 0])
+        sense.set_pixel(3, 0, [0, 0, 0])
+        displayGreen = True
 
     counter += 1
     if(counter == 10):
@@ -52,7 +67,7 @@ def ajax_request():
     
 @app.route('/displaytext', methods=['GET'])
 def displayText():
-    sense.show_message("Snyggt jobbat!")
+    sense.show_message("Perfekt!")
     return jsonify({'MessageDisplayed': True})
     
     
